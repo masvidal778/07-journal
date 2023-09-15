@@ -3,13 +3,21 @@ import {defineComponent} from 'vue'
 
 export default defineComponent({
   name: "FabNew",
+  props: {
+    icon: {
+      type: String,
+      default: 'fa-plus'
+    }
+  },
 
 })
 </script>
 
 <template>
 <button class="btn btn-primary">
-  <i class="fa fa-2x fa-plus"></i>
+  <i class="fa fa-2x"
+     :class="icon"
+  ></i>
 </button>
 </template>
 
