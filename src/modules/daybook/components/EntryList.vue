@@ -35,7 +35,7 @@ export default defineComponent({
 }
 
 .entry-scrollarea{
-  height: calc(100vh - 111px);
+  height: calc(100vh - 102px);
   overflow: scroll;
 }
 </style>
