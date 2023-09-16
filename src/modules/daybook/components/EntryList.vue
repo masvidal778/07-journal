@@ -35,7 +35,8 @@ export default defineComponent({
     <!-- Cridar el getEntriesByTerm on està el item in 100 -->
     <IndividualEntry
         v-for="entry in entriesByTerm"
-        :key="entry"
+        :key="entry.id"
+        :entry="entry"
     />
 
   </div>

@@ -2,7 +2,20 @@
 import {defineComponent} from 'vue'
 
 export default defineComponent({
-  name: "IndividualEntry"
+  name: "IndividualEntry",
+  props: {
+    entry: {
+      type: Object,
+      required: true
+    }
+  },
+  computed: {
+    shortText() {
+      return( this.entry.text.length  > 130)
+          ? this.entry.text.substring(0, 130) + '...'
+          : this.entry.text
+    }
+  }
 })
 </script>
 
@@ -20,7 +33,7 @@ export default defineComponent({
     </div>
 
     <div class="entry-description">
-      Morbi ipsum ex, facilisis a ante dapibus, vehicula aliquet nunc. Vivamus imperdiet lacus augue, eget venenatis tortor elementum non. Morbi in turpis libero. Suspendisse purus sem, euismod a nisl vel, pretium sodales mauris. Aliquam sagittis ligula ac leo consectetur, at placerat leo egestas. Maecenas consequat dignissim neque et luctus. Quisque sit amet varius mi. Ut vitae lacinia purus.
+      {{ shortText }}
     </div>
   </div>
 
