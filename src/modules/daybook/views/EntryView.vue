@@ -1,34 +1,53 @@
 <script>
 import {defineAsyncComponent, defineComponent} from 'vue'
+import { mapGetters } from "vuex";
 
 export default defineComponent({
   name: "EntryView",
+  props: {
+    id: {
+      type: String,
+      required: true
+    },
+  },
   components: {
-    FabNew: defineAsyncComponent( () => import('../components/FabNew.vue') )
+    FabNew: defineAsyncComponent(() => import('../components/FabNew.vue'))
+  },
+  computed: {
+    ...mapGetters('journal', ['getEntryById']),
+  },
+  methods: {
+    loadEntry() {
+      const entry = this.getEntryById( this.id )
+      console.log(entry)
+    }
+  },
+  created() {
+    this.loadEntry()
   }
 })
 </script>
 
 <template>
-<div class="entry-title d-flex justify-content-between p-2">
-  <div>
-    <span class="text-success fs-3 fw-bold">15</span>
-    <span class="mx-1 fs-3">Setembre</span>
-    <span class="mx-2 fs-4 fw-light">2023, divendres</span>
-  </div>
+  <div class="entry-title d-flex justify-content-between p-2">
+    <div>
+      <span class="text-success fs-3 fw-bold">15</span>
+      <span class="mx-1 fs-3">Setembre</span>
+      <span class="mx-2 fs-4 fw-light">2023, divendres</span>
+    </div>
 
-  <div>
-    <button class="btn btn-danger mx-2">
-      Esborrar
-      <i class="fa fa-trash-all"></i>
-    </button>
+    <div>
+      <button class="btn btn-danger mx-2">
+        Esborrar
+        <i class="fa fa-trash-all"></i>
+      </button>
 
-    <button class="btn btn-primary">
-      Pujar fotografia
-      <i class="fa fa-upload"></i>
-    </button>
+      <button class="btn btn-primary">
+        Pujar fotografia
+        <i class="fa fa-upload"></i>
+      </button>
+    </div>
   </div>
-</div>
 
   <hr>
 
@@ -54,12 +73,12 @@ export default defineComponent({
 </template>
 
 <style lang="scss" scoped>
-textarea{
+textarea {
   font-size: 20px;
   border: none;
   height: 100%;
 
-  &:focus{
+  &:focus {
     outline: none;
   }
 }
