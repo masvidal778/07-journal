@@ -1,6 +1,7 @@
 <script>
 import {defineAsyncComponent, defineComponent} from 'vue'
 import { mapGetters } from "vuex";
+import getDayMonthYear from "@/modules/daybook/helpers/getDayMonthYear";
 
 export default defineComponent({
   name: "EntryView",
@@ -13,13 +14,34 @@ export default defineComponent({
   components: {
     FabNew: defineAsyncComponent(() => import('../components/FabNew.vue'))
   },
+  data() {
+    return {
+      //entrada del estado
+      entry: null
+    }
+  },
   computed: {
     ...mapGetters('journal', ['getEntryById']),
-  },
+    day() {
+      const { day } = getDayMonthYear( this.entry.date )
+      return day
+    },
+    month() {
+      const { month } = getDayMonthYear( this.entry.date )
+      return month
+    },
+    yearDay() {
+      const { yearDay } = getDayMonthYear( this.entry.date )
+      return yearDay
+    }
+    },
   methods: {
     loadEntry() {
       const entry = this.getEntryById( this.id )
-      console.log(entry)
+
+      if( !entry ) this.$router.push({ name: 'no-entry' })
+
+      this.entry = entry
     }
   },
   created() {
@@ -30,8 +52,9 @@ export default defineComponent({
 
 <template>
   <div class="entry-title d-flex justify-content-between p-2">
+
     <div>
-      <span class="text-success fs-3 fw-bold">15</span>
+      <span class="text-success fs-3 fw-bold"> {{ day }} </span>
       <span class="mx-1 fs-3">Setembre</span>
       <span class="mx-2 fs-4 fw-light">2023, divendres</span>
     </div>
@@ -53,10 +76,7 @@ export default defineComponent({
 
   <div class="d-flex flex-column px-3 h-75">
     <textarea
-        name=""
-        id=""
-        cols="30"
-        rows="10"
+        v-model="entry.text"
         placeholder="Què ha passat avui?"
     ></textarea>
   </div>
