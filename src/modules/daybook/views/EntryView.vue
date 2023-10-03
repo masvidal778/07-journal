@@ -95,7 +95,7 @@ export default defineComponent({
       alt="entry-picture"
       class="img-thumbnail"
   >
-    
+
   </template>
 
 
