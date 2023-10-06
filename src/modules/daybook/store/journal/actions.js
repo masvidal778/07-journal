@@ -1,6 +1,9 @@
 //Accions asincrones que poden cridar a una mutació
-export const loadEntries = async (/*{ commit }*/) => {
+import journalApi from "@/api/journalApi";
 
+export const loadEntries = async (/*{ commit }*/) => {
+    const { data } = await journalApi.get('/entries.json')
+    console.log( data )
 }
 
 export const updateEntries = async (/*{ commit }*/) => {
