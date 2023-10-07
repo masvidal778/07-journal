@@ -42,6 +42,9 @@ export default defineComponent({
       if (!entry) return this.$router.push({name: 'no-entry'})
 
       this.entry = entry
+    },
+    async saveEntry() {
+      console.log('Saving entry')
     }
   },
 
@@ -101,6 +104,7 @@ export default defineComponent({
 
   <FabNew
       icon="fa-save"
+      @on:click="saveEntry"
   />
 
 
