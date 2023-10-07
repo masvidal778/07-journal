@@ -3,25 +3,5 @@
 
 export default () => ({
     isLoading: true,
-    entries: [
-        {
-            id: '1',
-            date: new Date().toDateString(), //sat 23, julio...
-            text: 'Aliquam tristique erat massa, at commodo mauris vulputate vel. Aenean ut tincidunt magna, quis bibendum risus. Etiam dignissim, ipsum vitae accumsan vestibulum, ante velit consectetur est, quis scelerisque enim libero vel massa',
-            picture: null, //https://
-        },
-        {
-            id: '2',
-            date: new Date().toDateString(), //sat 23, julio...
-            text: 'Pellentesque sed neque quis nisi tincidunt mattis. Donec dictum euismod posuere. Phasellus ornare et nisl nec egestas. Maecenas ac lacinia leo.',
-            picture: null, //https://
-        },
-        {
-            id: '3',
-            date: new Date().toDateString(), //sat 23, julio...
-            text: 'Vivamus ut eleifend magna, in porttitor arcu. Sed eu fermentum turpis, feugiat volutpat nulla. Nunc vitae purus malesuada, venenatis arcu vitae, condimentum lectus. In quis ligula at metus ornare viverra nec eu augue.',
-            picture: null, //https://
-        },
-        
-    ]
+    entries: []
 })

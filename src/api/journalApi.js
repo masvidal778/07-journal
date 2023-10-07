@@ -8,4 +8,3 @@ const journalApi = axios.create({
 export default journalApi
 
 
-
