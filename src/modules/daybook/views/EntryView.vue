@@ -180,12 +180,6 @@ export default defineComponent({
     ></textarea>
     </div>
 
-    <!--<img
-      src="https://static01.nyt.com/images/2022/11/29/science/00tb-cats1/00tb-cats1-mediumSquareAt3X.jpg"
-      alt="entry-picture"
-      class="img-thumbnail"
-  >-->
-
     <img
         v-if="localImage"
         :src="localImage"
