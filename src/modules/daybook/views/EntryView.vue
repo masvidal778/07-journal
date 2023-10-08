@@ -1,6 +1,7 @@
 <script>
 import { defineAsyncComponent, defineComponent } from 'vue'
 import { mapGetters, mapActions } from "vuex";
+import Swal from 'sweetalert2'
 import getDayMonthYear from "@/modules/daybook/helpers/getDayMonthYear";
 
 export default defineComponent({
@@ -54,6 +55,12 @@ export default defineComponent({
     },
     async saveEntry() {
 
+      new Swal({
+        title: 'Esperi, sisplau',
+        allowOutsideClick: false
+      })
+      Swal.showLoading()
+
       if( this.entry.id ) {
         await this.updateEntries( this.entry )
       } else {
@@ -65,12 +72,35 @@ export default defineComponent({
         this.$router.push({ name: 'entry' , params: { id } })
 
       }
+
+      Swal.fire('Guardat', 'Entrada registrada amb èxit', 'success')
     },
     async onDeleteEntry() {
-      await this.deleteEntries( this.entry.id )
 
-      //redirect to entry
-      this.$router.push({ name: 'no-entry' })
+      const { isConfirmed} = await Swal.fire({
+        title: "Està segur que vol esborrar l'entrada?",
+        text: "Un cop esborrada, no es podrà recuperar",
+        showDenyButton: true,
+        confirmButtonText: "Sí, vull esborrar l'entrada"
+      })
+
+      if( isConfirmed === true ) {
+        new Swal({
+          title: 'Esperi, sisplau',
+          allowOutsideClick: false
+        })
+        Swal.showLoading()
+
+        await this.deleteEntries( this.entry.id )
+
+        //redirect to entry
+        this.$router.push({ name: 'no-entry' })
+
+        Swal.fire('Esborrada', 'Entrada esborrada amb èxit', 'success')
+      }
+
+
+
     }
   },
 
