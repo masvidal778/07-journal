@@ -38,17 +38,30 @@ export default defineComponent({
   methods: {
     ...mapActions('journal', ['updateEntries']),
     loadEntry() {
-      const entry = this.getEntryById(this.id)
+      let entry;
 
-      if (!entry) return this.$router.push({name: 'no-entry'})
+      if ( this.id === 'new' ){
+        entry = {
+          text: 'Nova entrada',
+          date: new Date().getTime()
+        }
+      }else{
+        entry = this.getEntryById(this.id)
+        if (!entry) return this.$router.push({name: 'no-entry'})
+      }
 
       this.entry = entry
     },
     async saveEntry() {
-      console.log('Saving entry')
+
+      if( this.entry.id ) {
+        await this.updateEntries( this.entry )
+      } else {
+        console.log("Post d'una nova entrada")
+      }
 
       //Action del Journal Module
-      this.updateEntries( this.entry )
+
     },
 
   },

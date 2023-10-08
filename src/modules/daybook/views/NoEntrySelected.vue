@@ -5,6 +5,11 @@ export default defineComponent({
   name: "NoEntrySelected",
   components: {
     FabNew: defineAsyncComponent( () => import('../components/FabNew.vue') )
+  },
+  methods: {
+    createNewEntry(){
+      this.$router.push( { name: 'entry', params: { id: 'new' } } )
+    }
   }
 })
 </script>
@@ -13,7 +18,9 @@ export default defineComponent({
   <div class="d-flex justify-content-center">
     <h1 class="align-self-center">No hi ha res seleccionat</h1>
   </div>
-  <FabNew />
+  <FabNew
+      @on:click="createNewEntry"
+  />
 </template>
 
 <style lang="scss" scoped>
