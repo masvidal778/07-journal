@@ -1,8 +1,17 @@
+//export const myAction = async ({ commit }) => {
+
+//}
+
 //Accions asincrones que poden cridar a una mutació
 import journalApi from "@/api/journalApi";
 
 export const loadEntries = async ( { commit } ) => {
     const { data } = await journalApi.get('/entries.json')
+
+    if( !data ){
+        commit('setEntries', [] )
+        return
+    }
 
     const entries = []
     for( let id of Object.keys( data ) ){
@@ -37,7 +46,7 @@ export const createEntries = async ( { commit }, newEntry) => {
 
     const dataToSave =  { date, picture, text }
 
-    const { data } = await journalApi.post( 'entries.json', dataToSave)
+    const { data } = await journalApi.post( '/entries.json', dataToSave)
 
     //data = "name": "-NgDNpjoWOZS2q9W1sDl"
     dataToSave.id = data.name
@@ -46,4 +55,13 @@ export const createEntries = async ( { commit }, newEntry) => {
 
     return data.name
 
+}
+
+export const deleteEntries = async ( { commit }, id ) => {
+
+    await journalApi.delete(`/entries/${ id }.json`)
+
+    commit('deleteEntry', id)
+
+    return id
 }

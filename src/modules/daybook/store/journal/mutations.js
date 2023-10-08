@@ -19,3 +19,8 @@ export const addEntry =  ( state, newEntry ) => {
     //state -> entries -> nova entrada, la primera
     state.entries = [ newEntry, ...state.entries ]
 }
+
+export const deleteEntry = ( state, id ) => {
+    //delete entry from state.entries by this id
+    state.entries = state.entries.filter( entry => entry.id !== id)
+}

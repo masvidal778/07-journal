@@ -36,7 +36,7 @@ export default defineComponent({
     }
   },
   methods: {
-    ...mapActions('journal', ['updateEntries', 'createEntries']),
+    ...mapActions('journal', ['updateEntries', 'createEntries', 'deleteEntries']),
     loadEntry() {
       let entry;
 
@@ -65,9 +65,13 @@ export default defineComponent({
         this.$router.push({ name: 'entry' , params: { id } })
 
       }
-
     },
+    async onDeleteEntry() {
+      await this.deleteEntries( this.entry.id )
 
+      //redirect to entry
+      this.$router.push({ name: 'no-entry' })
+    }
   },
 
   created() {
@@ -94,7 +98,10 @@ export default defineComponent({
       </div>
 
       <div>
-        <button class="btn btn-danger mx-2">
+        <button
+          v-if="entry.id"
+          class="btn btn-danger mx-2"
+          @click="onDeleteEntry">
           Esborrar
           <i class="fa fa-trash-all"></i>
         </button>
