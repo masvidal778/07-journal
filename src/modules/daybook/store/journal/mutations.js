@@ -6,7 +6,12 @@ export const setEntries =  ( state, entries ) => {
 
 }
 
-export const updateEntry =  ( /*state*/ ) => {
+export const updateEntry =  ( state, entryUpdated ) => { //receive entry updated
+
+    //crea un nou array on només hi ha els id de l'store i els compara amb els id de l'entryUpdated
+    const index = state.entries.map( e => e.id ).indexOf( entryUpdated.id )
+    state.entries[ index ] = entryUpdated
+
 
 }
 

@@ -23,7 +23,6 @@ export default defineComponent({
 <template>
 <NavBar />
 
-  <!-- div v-if="isLoading" -->
   <div v-if="isLoading"
       class="row justify-content-md-center">
     <div class="col-3 bg-info text-center mt-5">
@@ -34,7 +33,6 @@ export default defineComponent({
     </div>
   </div>
 
-  <!-- div v-else -->
   <div v-else
       class="d-flex">
     <div class="col-4">

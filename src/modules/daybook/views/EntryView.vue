@@ -1,6 +1,6 @@
 <script>
-import {defineAsyncComponent, defineComponent} from 'vue'
-import {mapGetters} from "vuex";
+import { defineAsyncComponent, defineComponent } from 'vue'
+import { mapGetters, mapActions } from "vuex";
 import getDayMonthYear from "@/modules/daybook/helpers/getDayMonthYear";
 
 export default defineComponent({
@@ -36,6 +36,7 @@ export default defineComponent({
     }
   },
   methods: {
+    ...mapActions('journal', ['updateEntries']),
     loadEntry() {
       const entry = this.getEntryById(this.id)
 
@@ -45,7 +46,11 @@ export default defineComponent({
     },
     async saveEntry() {
       console.log('Saving entry')
-    }
+
+      //Action del Journal Module
+      this.updateEntries( this.entry )
+    },
+
   },
 
   created() {
