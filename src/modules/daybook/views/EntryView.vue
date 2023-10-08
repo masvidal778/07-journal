@@ -118,7 +118,7 @@ export default defineComponent({
       fr.readAsDataURL( file )
     },
     onSelectImage() {
-      
+      this.$refs.imageSelector.click()
     }
   },
 
@@ -146,7 +146,11 @@ export default defineComponent({
       </div>
 
       <input type="file"
-              @change="onSelectedImage">
+             @change="onSelectedImage"
+             ref="imageSelector"
+             v-show="false"
+             accept="image/png, image/jpg"
+      >
       
       <div>
         <button
@@ -157,7 +161,10 @@ export default defineComponent({
           <i class="fa fa-trash-all"></i>
         </button>
 
-        <button class="btn btn-primary">
+        <button
+            class="btn btn-primary"
+            @click="onSelectImage"
+        >
           Pujar fotografia
           <i class="fa fa-upload"></i>
         </button>
