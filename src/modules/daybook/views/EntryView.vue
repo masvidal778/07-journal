@@ -18,7 +18,9 @@ export default defineComponent({
   data() {
     return {
       //entrada del estado
-      entry: null
+      entry: null,
+      localImage: null,
+      file: null
     }
   },
   computed: {
@@ -99,8 +101,24 @@ export default defineComponent({
         Swal.fire('Esborrada', 'Entrada esborrada amb èxit', 'success')
       }
 
+    },
+    onSelectedImage( event ) {
+      const file = event.target.files[0]
 
+      if( !file ){
+        this.localImage = null
+        this.file = null
+        return
+      }
 
+      this.file = file
+
+      const fr = new FileReader()
+      fr.onLoad = () => this.localImage = fr.result
+      fr.readAsDataURL( file )
+    },
+    onSelectImage() {
+      
     }
   },
 
@@ -127,6 +145,9 @@ export default defineComponent({
         <span class="mx-2 fs-4 fw-light">2023, divendres</span>
       </div>
 
+      <input type="file"
+              @change="onSelectedImage">
+      
       <div>
         <button
           v-if="entry.id"
@@ -152,11 +173,18 @@ export default defineComponent({
     ></textarea>
     </div>
 
-    <img
+    <!--<img
       src="https://static01.nyt.com/images/2022/11/29/science/00tb-cats1/00tb-cats1-mediumSquareAt3X.jpg"
       alt="entry-picture"
       class="img-thumbnail"
-  >
+  >-->
+
+    <img
+        v-if="localImage"
+        :src="localImage"
+        alt="entry-picture"
+        class="img-thumbnail"
+    >
 
   </template>
 
