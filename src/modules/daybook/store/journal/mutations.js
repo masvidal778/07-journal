@@ -15,6 +15,7 @@ export const updateEntry =  ( state, entryUpdated ) => { //receive entry updated
 
 }
 
-export const addEntry =  ( /*state*/ ) => {
-
+export const addEntry =  ( state, newEntry ) => {
+    //state -> entries -> nova entrada, la primera
+    state.entries = [ newEntry, ...state.entries ]
 }

@@ -36,7 +36,7 @@ export default defineComponent({
     }
   },
   methods: {
-    ...mapActions('journal', ['updateEntries']),
+    ...mapActions('journal', ['updateEntries', 'createEntries']),
     loadEntry() {
       let entry;
 
@@ -57,10 +57,14 @@ export default defineComponent({
       if( this.entry.id ) {
         await this.updateEntries( this.entry )
       } else {
-        console.log("Post d'una nova entrada")
-      }
 
-      //Action del Journal Module
+        //Action createEntry await action
+        const id = await this.createEntries( this.entry )
+
+        //redirectTo => entry, param:id
+        this.$router.push({ name: 'entry' , params: { id } })
+
+      }
 
     },
 
