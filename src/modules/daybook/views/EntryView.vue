@@ -2,7 +2,9 @@
 import { defineAsyncComponent, defineComponent } from 'vue'
 import { mapGetters, mapActions } from "vuex";
 import Swal from 'sweetalert2'
+
 import getDayMonthYear from "@/modules/daybook/helpers/getDayMonthYear";
+import uploadImage from "@/modules/daybook/helpers/uploadImage"
 
 export default defineComponent({
   name: "EntryView",
@@ -63,6 +65,10 @@ export default defineComponent({
       })
       Swal.showLoading()
 
+      const picture = await uploadImage( this.file )
+
+      this.entry.picture = picture
+
       if( this.entry.id ) {
         await this.updateEntries( this.entry )
       } else {
@@ -75,6 +81,7 @@ export default defineComponent({
 
       }
 
+      this.file = null
       Swal.fire('Guardat', 'Entrada registrada amb èxit', 'success')
     },
     async onDeleteEntry() {
@@ -179,6 +186,13 @@ export default defineComponent({
         placeholder="Què ha passat avui?"
     ></textarea>
     </div>
+
+    <img
+        v-if="entry.picture && !localImage"
+        :src="entry.picture"
+        alt="entry-picture"
+        class="img-thumbnail"
+    >
 
     <img
         v-if="localImage"
