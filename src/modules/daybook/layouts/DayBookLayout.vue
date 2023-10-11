@@ -22,8 +22,8 @@ export default defineComponent({
 
 <template>
 <NavBar />
-  <!-- v-if="isLoading" -->
-  <div
+
+  <div v-if="isLoading"
       class="row justify-content-md-center">
     <div class="col-3 bg-info text-center mt-5">
       Esperi, sisplau...
@@ -32,8 +32,8 @@ export default defineComponent({
       </h3>
     </div>
   </div>
-  <!-- v-else -->
-  <div
+
+  <div v-else
       class="d-flex">
     <div class="col-4">
       <EntryList />

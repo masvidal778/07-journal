@@ -121,7 +121,7 @@ export default defineComponent({
       this.file = file
 
       const fr = new FileReader()
-      fr.onLoad = () => this.localImage = fr.result
+      fr.onload = () => this.localImage = fr.result
       fr.readAsDataURL( file )
     },
     onSelectImage() {
@@ -158,7 +158,7 @@ export default defineComponent({
              v-show="false"
              accept="image/png, image/jpg"
       >
-      
+
       <div>
         <button
           v-if="entry.id"
