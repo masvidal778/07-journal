@@ -7,7 +7,7 @@ const uploadImage = async ( file ) => {
     try {
 
         const formData = new FormData()
-        formData.append('upload_preset', 'curso-vue-fh')
+        formData.append('upload_preset', 'curs-vue-fh')
         formData.append('file', file)
 
         const url = 'https://api.cloudinary.com/v1_1/dqkxcuput/image/upload'
