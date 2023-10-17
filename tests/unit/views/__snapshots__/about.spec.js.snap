@@ -5,3 +5,9 @@ exports[`Proves a l'AboutView Renderitza correctament el component 1`] = `
   <h1>This is an about page</h1>
 </div>
 `;
+
+exports[`proves a l'About View Renderitza correctament el component 1`] = `
+<div class="about">
+  <h1>This is an about page</h1>
+</div>
+`;
