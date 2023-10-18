@@ -67,7 +67,7 @@ export default defineComponent({
 
       const picture = await uploadImage( this.file )
 
-      this.entry.picture = picture
+      this.entry.picture = picture.secure_url
 
       if( this.entry.id ) {
         await this.updateEntries( this.entry )
