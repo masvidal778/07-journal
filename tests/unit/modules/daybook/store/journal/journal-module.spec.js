@@ -3,8 +3,6 @@ import journal from "@/modules/daybook/store/journal";
 import { journalState } from "../../../../mock-data/test-journal-state";
 import {addEntry} from "@/modules/daybook/store/journal/mutations";
 
-;
-
 const createVuexStore = (initialState) =>
     createStore({
         modules: {
@@ -50,7 +48,7 @@ describe('Vuex, testing journal module', () => {
             id: 'ABC123',
             date: "Sun Jul 18 2021",
             text: 'Hola, món! Des de les proves',
-            picture: "https://res.cloudinary.com/dqkxcuput/image/upload/v1697048344/wibhrg2otqmhoqdcg3kc.jpg"
+            picture: "https://res.cloudinary.com/xxx/image/upload/v1697048344/wibhrg2otqmhoqdcg3kc.jpg"
         }
 
         //commit de la mutació
