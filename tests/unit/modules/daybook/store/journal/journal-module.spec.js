@@ -18,6 +18,7 @@ const createVuexStore = (initialState) =>
 
 describe('Vuex, testing journal module', () => {
 
+    //Basic =====================
     test('this is the initial state, it should have to this state', () => {
 
         //Es crea un vuex store per treballar amb les proves
@@ -28,7 +29,7 @@ describe('Vuex, testing journal module', () => {
         expect(entries).toEqual(journalState.entries)
     })
 
-    //Mutations
+    //Mutations =====================
     test('mutation: setEntries', () => {
 
         const store = createVuexStore({isLoading: true, entries: []})
@@ -94,6 +95,25 @@ describe('Vuex, testing journal module', () => {
         expect(store.state.journal.entries.length).toBe(2)
         //entry 'ABC-123' no ha d'existir
         expect(store.state.journal.entries.find( e => e.id === 'ABC-123' )).toBeFalsy()
+
+    })
+
+    //Getters =====================
+    test('getters: getEntriesByTerm and getEntryById', () => {
+
+        const store = createVuexStore( journalState )
+
+        const [ entry1, entry2 ] = journalState.entries
+
+        expect( store.getters['journal/getEntriesByTerm']('').length ).toBe(2)
+        expect( store.getters['journal/getEntriesByTerm']('et').length ).toBe(1)
+
+        expect( store.getters['journal/getEntriesByTerm']('et') ).toEqual([ entry2 ])
+
+
+        //getEntryById
+        //cridar id de l'entry 1
+        expect( store.getters['journal/getEntryById']('ABC123') ).toEqual( entry1 )
 
     })
 
