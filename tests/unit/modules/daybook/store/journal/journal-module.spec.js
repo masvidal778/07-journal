@@ -53,11 +53,13 @@ describe('Vuex, testing journal module', () => {
         //commit de la mutació
         store.commit('journal/updateEntry', updatedEntry)
 
+        const storeEntries = store.state.journal.entries
+
         //entries.length = 2
-        expect(store.state.journal.entries.length).toBe(2)
+        expect(storeEntries.length).toBe(2)
         //entries tiene que existir el updatedEntry toEqual
         expect(
-            store.state.journal.entries.find( e => e.id === updatedEntry.id)
+            storeEntries.find( e => e.id === updatedEntry.id)
             ).toEqual(updatedEntry)
 
     })
