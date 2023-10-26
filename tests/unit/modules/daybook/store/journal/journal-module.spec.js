@@ -129,4 +129,29 @@ describe('Vuex, testing journal module', () => {
 
     })
 
+    test('actions: updateEntries', async () => {
+
+        const store = createVuexStore( journalState )
+
+        const updatedEntry = {
+            id: 'ABC123',
+            date: "Sun Jul 18 2021",
+            text: 'Aliquam tristique erat massa, at commodo mauris vulputate vel. Aenean ut tincidunt magna, quis bibendum risus. Etiam dignissim, ipsum vitae accumsan vestibulum, ante velit consectetur est, quis scelerisque enim libero vel massa',
+            otherField: true,
+            other: { a: 1 }
+        }
+
+        await store.dispatch('journal/updateEntries', updatedEntry)
+
+        expect( store.state.journal.entries.length ).toBe(2)
+        expect(
+            store.state.journal.entries.find( e => e.id === updatedEntry.id)
+        ).toEqual( {
+            id: 'ABC123',
+            date: "Sun Jul 18 2021",
+            text: 'Aliquam tristique erat massa, at commodo mauris vulputate vel. Aenean ut tincidunt magna, quis bibendum risus. Etiam dignissim, ipsum vitae accumsan vestibulum, ante velit consectetur est, quis scelerisque enim libero vel massa',
+        } )
+
+    })
+
 })
