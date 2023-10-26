@@ -117,4 +117,16 @@ describe('Vuex, testing journal module', () => {
 
     })
 
+
+    //Actions =====================
+    test('actions: loadEntries', async () => {
+
+        const store = createVuexStore({ isLoading: true, entries: [] })
+
+        await store.dispatch('journal/loadEntries')
+
+        expect( store.state.journal.entries.length ).toBe(2)
+
+    })
+
 })
