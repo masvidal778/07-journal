@@ -154,4 +154,38 @@ describe('Vuex, testing journal module', () => {
 
     })
 
+    test('ations: createEntries and deleteEntries', async () => {
+
+        //create store
+        const store = createVuexStore( journalState )
+
+        //newEntry = { date: number, text: 'Nova entrada des de les proves' }
+        const newEntry = {
+            date:"Sun Jul 18 2021",
+            text: "Nova entrada des de les proves"
+        }
+
+        //dispatch de l'acció createEntries
+        const id = await store.dispatch('journal/createEntries', newEntry)
+
+        //l'id ha de ser un string
+        expect( typeof id).toBe('string')
+
+        //la nova entrada ha d'existir a l'state.journal.entries...
+        expect(
+            store.state.journal.entries.find( e => e.id === id)
+        ).toBeTruthy()
+
+        // # Segona part
+
+        //dispatch de l'acció de deleteEntries
+        await store.dispatch( 'journal/deleteEntries', id )
+
+        //la nova entrada NO ha d'existir a l'state.journal.entries...
+        expect(
+            store.state.journal.entries.find( e => e.id === id)
+        ).toBeFalsy()
+
+    })
+
 })
