@@ -1,34 +1,31 @@
 import {shallowMount} from "@vue/test-utils";
 import { createStore } from "vuex";
 
+import journal from "@/modules/daybook/store/journal";
 import EntryList from "@/modules/daybook/components/EntryList.vue";
-import { getEntriesByTerm } from "@/modules/daybook/store/journal/getters";
 import { journalState } from "../../../mock-data/test-journal-state";
 
-
-describe('Testing EntryList', () => {
-
-    const journalMockModule = {
-        namespaced: true,
-        getters: {
-            getEntriesByTerm
-        },
-        state: () => ({
-            isLoading: false,
-            entries: journalState.entries
-        })
-    }
-
-    const store = createStore({
+const createVuexStore = ( initialState ) =>
+    createStore({
         modules: {
-            journal: { ...journalMockModule }
+            journal: {
+                //desestructurem journal per sobreescriure l'state amb el que es tingui a initialState
+                ...journal,
+                state: {...initialState}
+            }
         }
     })
 
+describe('Testing EntryList', () => {
+
+    const store = createVuexStore( journalState )
+    const mockRouter = {
+        push: jest.fn()
+    }
     const wrapper = shallowMount( EntryList, {
         global: {
             mocks: {
-                //TODO $router:
+                $router: mockRouter
             },
             plugins: [ store ]
         }
@@ -37,7 +34,8 @@ describe('Testing EntryList', () => {
 
     test('should call getEntriesByTerm and show 2 entries', () => {
 
-        console.log(wrapper.html())
+        expect( wrapper.findAll('entry-stub').length ).toBe(2)
+        expect( wrapper.html()).toMatchSnapshot()
 
     })
 })
