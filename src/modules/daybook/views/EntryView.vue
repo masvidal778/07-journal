@@ -59,7 +59,7 @@ export default defineComponent({
     },
     async saveEntry() {
 
-      new Swal({
+      Swal.fire({
         title: 'Esperi, sisplau',
         allowOutsideClick: false
       })
@@ -93,13 +93,14 @@ export default defineComponent({
         confirmButtonText: "Sí, vull esborrar l'entrada"
       })
 
-      if( isConfirmed === true ) {
-        new Swal({
+      if( isConfirmed ) {
+        Swal.fire({
           title: 'Esperi, sisplau',
           allowOutsideClick: false
         })
         Swal.showLoading()
 
+        console.log('going to delete')
         await this.deleteEntries( this.entry.id )
 
         //redirect to entry
