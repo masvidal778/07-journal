@@ -67,7 +67,7 @@ export default defineComponent({
 
       const picture = await uploadImage( this.file )
 
-      this.entry.picture = picture
+      this.entry.picture = picture.secure_url
 
       if( this.entry.id ) {
         await this.updateEntries( this.entry )
@@ -148,8 +148,8 @@ export default defineComponent({
 
       <div>
         <span class="text-success fs-3 fw-bold"> {{ day }} </span>
-        <span class="mx-1 fs-3">Setembre</span>
-        <span class="mx-2 fs-4 fw-light">2023, divendres</span>
+        <span class="mx-1 fs-3">{{ month }}</span>
+        <span class="mx-2 fs-4 fw-light">{{ yearDay }}</span>
       </div>
 
       <input type="file"

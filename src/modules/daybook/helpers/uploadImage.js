@@ -13,9 +13,7 @@ const uploadImage = async ( file ) => {
         const url = 'https://api.cloudinary.com/v1_1/dqkxcuput/image/upload'
         const { data } = await axios.post(url, formData)
 
-        console.log(data)
-
-        return data.secure_url
+        return data
 
     } catch (error) {
         console.log('Error al carregar la imatge, reviseu els logs')
